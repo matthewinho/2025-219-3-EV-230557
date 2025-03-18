@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>vibevault</title>
+
+    <a href="http://127.0.0.1:5500/survey.html">User Survey</a>
+    <a href='http://127.0.0.1:5500/investigation.html'> FORM</a>
+
+
+    <link rel="stylesheet" type="css" href="css/recom.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js">
+    </script>
+</head>
+
+
+<body style="background-color: rgb(251, 240, 240);">
+    <!-- inline style: go into the tag and do it -->
+    <!--<h1 style="text-align: center;"></h1> -->
+
+    <!-- <img src="image.jfif" alt="Paris" class="center"> -->
+    <h1>
+        vibevault
+    </h1>
+    <p>Acquiring information about the best hits of music to find out all your musical curiousities</p><br>
+    <p>how streaming platforms like Spotify, Apple Music, and Deezer helped songs gain popularity</p>
+    <br>
+    <label for="hits">CHOOSE A YEAR WITH THE GREARTEST HITS:</label>
+    
+   
+    <select name="hits" id="hits">
+
+    </select>
+    <canvas id="Hit_songs_by_year"></canvas>
+
+
+    
+
+    <label for="quantity">highest value ):</label>
+    <input type="number" id="higher" name="quantity" min="46" max="134">
+    <label for="quantity">minimum value ):</label>
+    <input type="number" id="lower" name="quantity" min='46' max="134">
+    <button id='bcbutton'>update</button> -->
+
+
+    <canvas id="monthly_release"></canvas>
+
+    <h3><b>recommendations/suggestions
+
+
+
+            <label for="recommendation1">Q.1 what years have the greatest hits average/most streams:</label>
+
+            <select name="recommendation1" id="recommendation1">
+
+            </select>
+            <p>Q.1 What are somg interesting facts about hitsongs?</p>
+            <select id="musicchoice">
+                <option id="c1" value="averageBPM">Average BPM of Hit Songs</option>
+                <option id='c2' value="highest_stream">hitsong with most amount of streams</option>
+                <!-- Add other options as needed -->
+            </select>
+            <p id='message2'>average bpm of a hitsong?</p>
+            <p id='message'>whats the highest amount of streams for a hitsong?</p>
+
+
+
+
+
+
+            <script type="module">
+                // Import the functions you need from the SDKs you need
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+                // TODO: Add SDKs for Firebase products that you want to use
+                // https://firebase.google.com/docs/web/setup#available-libraries
+
+                // Your web app's Firebase configuration
+                const firebaseConfig = {
+                    apiKey: "AIzaSyCuC-TfioQNO4knLx4iWXZ8TBVjiGghJu8",
+                    authDomain: "lcacc2024.firebaseapp.com",
+                    databaseURL: "https://lcacc2024-default-rtdb.europe-west1.firebasedatabase.app",
+                    projectId: "lcacc2024",
+                    storageBucket: "lcacc2024.firebasestorage.app",
+                    messagingSenderId: "736551012525",
+                    appId: "1:736551012525:web:ba5c15ebb5cde4f0ba9e24"
+                };
+
+
+                // let addBookRecord = document.getElementById('addBook');
+                // addBookRecord.addEventListener('submit', addBookToRecords)
+
+                // Initialize Firebase
+                const app = initializeApp(firebaseConfig);
+
+                import { getDatabase, ref, set, get, update, child, query, orderByChild } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
+                const database = getDatabase(); //This creates a firebase instance
+                // let link_to_database_root = ref(database); //This creates a reference (link) to the root of your database
+                //This will create a reference to whatever address comes after the comma
+                const firebaseRef = ref(database);
+                let prices = []
+                let childKeys = {}
+
+
+
+
+                // const canvas = document.getElementById("myCanvas");
+                // const ctx = canvas.getContext("2d");
+                // ctx.fillStyle = "rgb(12, 5, 7)";
+                // ctx.fillRect(10, 10, 100, 100);
+
+                let values = []
+                let labels1 = []
+
+
+                let firstgraphcanvas = document.getElementById("Hit_songs_by_year");
+                let firstgraphData = {
+                    labels: [],
+                    datasets: [
+                        {
+                            label: '',
+                            data: [],
+                            backgroundColor: ['rgb(162, 179, 54)',
+                                'rgb(0, 226, 255)',
+                                'rgba(255, 206, 86, 0.2)'
+                            ],
+
+                            borderColor: [
+                                'rgba(255,99,132,1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)'
+                            ],
+                            borderWidth: 1
+                        }
+                    ]
+                };
+                let hitsongsyear = null;
+
+                let music_app_interaction = {};
+                let dropdownyears = document.getElementById("hits");
+                let dropdownyear1 = document.getElementById("recommendation1");
+                get(child(firebaseRef, '/music_app_interaction')).then((snapshot) => {
+                    if (snapshot.exists()) {
+
+                        music_app_interaction = JSON.parse(JSON.stringify(snapshot.val()));
+                        console.log(snapshot.val()[2023]);
+                        console.log('here', music_app_interaction)
+                        for (let [name, precentage] of Object.entries(snapshot.val()[2023])) {
+                            values.push(precentage)
+                            labels1.push(name)
+
+
+                        }
+                        firstgraphData.labels = labels1
+                        firstgraphData.datasets[0].data = values
+                        hitsongsyear = new Chart(firstgraphcanvas, {
+                            type: 'pie',
+                            data: firstgraphData,
+                            options: {
+                                title: {
+                                    display: true,
+                                    text: 'Hitsongs from given year , which music platform affects their streams most'
+                                }
+
+
+                            }
+
+                        });
+
+                        for (let years in music_app_interaction) {
+                            let option = document.createElement("option");
+                            option.setAttribute('value', years);
+                            let optionText = document.createTextNode(years);
+                            option.appendChild(optionText);
+                            dropdownyears.appendChild(option);
+
+                            let option2 = document.createElement("option");
+                            option2.setAttribute('value', years);
+
+                            let optionText2 = document.createTextNode(years);
+                            option2.appendChild(optionText2);
+
+                            dropdownyear1.appendChild(option2);
+                        }
+                    }
+
+
+
+                    else {
+                        console.log("No data available");
+                    }
+                })
+                    .catch((error) => {
+                        console.error(error);
+                    });
+
+
+                const dropdownList = document.getElementById('hits');
+                dropdownList.addEventListener('change', function (event) {
+                    const selectedValue = event.target.value;
+
+                    updateGreatestHits(selectedValue)
+                });
+
+                function updateGreatestHits(year) {
+                    let tmpValues = [];
+                    let tmpLabels = [];
+                    for (let [name, precentage] of Object.entries(music_app_interaction[year])) {
+                        tmpValues.push(precentage)
+                        tmpLabels.push(name)
+
+
+                    }
+                    hitsongsyear.destroy();
+                    firstgraphData.labels = tmpLabels;
+                    firstgraphData.datasets[0].data = tmpValues
+                    hitsongsyear = new Chart(firstgraphcanvas, {
+                        type: 'pie',
+                        data: firstgraphData,
+                        options: {
+                            responsive: true,
+                            title: {
+                                    display: true,
+                                    text: 'Hitsongs from given year , which music platform affects their streams most'
+                                }
+                             
+                        }
+                    });
+                }
+
+
+
+                let secondgraphcanvas = document.getElementById("monthly_release");
+                let secondgraphdata = {
+                    labels: [],
+                    datasets: [
+                        {
+                            label: 'hitsongs released during certain months',
+                            data: [],
+                            backgroundColor: ['rgba(255, 99, 132 )',
+                                'rgba(54, 162, 235 )',
+                                'rgba(255, 206, 86 )',
+                                'rgb(0, 221, 180)',
+                                'rgb(68, 255, 0)',
+                                'rgba(255, 206, 86 )',
+                                'rgba(255, 206, 86 )',
+                                'rgba(255, 206, 87, )',
+                                'rgba(255, 206, 86 )',
+                                'rgba(255, 206, 86 )',
+                                'rgba(255, 206, 86 )',
+                                'rgba(255, 206, 86 )',
+                            ],
+
+                            borderColor: [
+                                'rgba(255,99,132,1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)'
+                            ],
+                            borderWidth: 1
+                        }
+                    ]
+                };
+                let monthrelease = null;
+                let monthly_hitsong_release = {};
+                get(child(firebaseRef, '/monthly_hitsong_release')).then((snapshot) => {
+                    if (snapshot.exists()) {
+
+                        monthly_hitsong_release = JSON.parse(JSON.stringify(snapshot.val()));
+                        console.log(snapshot.val());
+                        console.log('hi', monthly_hitsong_release)
+                        for (let [name1, precentage1] of Object.entries(snapshot.val())) {
+                            console.log(name1, '-------------->', precentage1)
+                            secondgraphdata.labels.push(name1)
+                            secondgraphdata.datasets[0].data.push(precentage1)
+                        }
+                        console.log(secondgraphdata.datasets[0].data)
+                        // secondgraphdata.labels=['January' , 'February' ,'March','April','May' ,'June','July',' August',' September',' October ','November' ,'December']
+                        // secondgraphdata.datasets[0].data=[1,2,3,4,5,6,7,8,9,12,11,12]
+                        monthrelease = new Chart(secondgraphcanvas, {
+                            type: 'bar',
+                            data: secondgraphdata,
+                            options: {
+                                responsive: true,
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        },scaleLabel: {
+                            display: true,
+                            labelString: 'number of hitsongs released by month'
+                        }
+                                    }],xAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        },scaleLabel: {
+                            display: true,
+                            labelString: 'months of the year'
+                        }
+                                    }]
+                                }
+                            }
+                        });
+
+                    }
+                });
+                let workingbutton = document.getElementById('bcbutton');
+                workingbutton.addEventListener("click", function () {
+
+                    alert("working")
+                    let high1 = document.getElementById('higher').value;
+                    let low1 = document.getElementById('lower').value;
+                    console.log(monthly_hitsong_release);
+                    let newdataset = {}
+                    for (let month in monthly_hitsong_release) {
+                        let release = monthly_hitsong_release[month];
+                        if (release >= low1 && release <= high1) {
+                            newdataset[month] = release;
+                        }
+                    }
+
+
+                    // you have the min and max, the chart monthrelease, monthly_hitsong_release
+                    let months = Object.keys(monthly_hitsong_release);
+                    let values = Object.values(monthly_hitsong_release);
+                    let filteredMonth = []; let fitleredValues = [];
+
+                    for (let m of months) {
+                        let v = monthly_hitsong_release[m];
+                        if ((v >= low1) && (v <= high1)) {
+                            filteredMonth.push(m);
+                            fitleredValues.push(v);
+                        }
+                    }
+
+                    console.log(filteredMonth)
+                    console.log(fitleredValues)
+
+                    monthrelease.data.labels = filteredMonth;
+                    monthrelease.data.datasets[0].data = fitleredValues;
+
+                    monthrelease.update();
+
+                    // console.log(monthly_hitsong_release)
+
+
+                })
+                //     (function() {
+                // var rangeInput = document.getElementById("range-input");
+                // var rangeValue = document.getElementById("range-value");
+
+                // // Print the range value to the output
+                // rangeInput.addEventListener("input", rangeOutput);
+
+                // function rangeOutput() {
+                //     rangeValue.innerText = rangeInput.value;
+                // }
+                // })();
+
+                let maxstreams = {}; // Variable to store the highest stream data
+
+                // Fetch data from Firebase (highest stream song data)
+                get(child(firebaseRef, '/streamsperyeartotal')).then((snapshot) => {
+                    if (snapshot.exists()) {
+                        console.log(snapshot.val());
+
+                        maxstreams = snapshot.val(); // Store the data in maxstreams
+                        console.log(maxstreams);
+
+
+                    }
+                });
+
+
+                dropdownyear1.addEventListener('change', function (event) {
+                    const selectedValue = event.target.value; // Get the selected year from the dropdown
+                    console.log("Selected year: " + selectedValue);
+
+                    let highstreams = 0;
+
+                    // Loop through the data to find the highest streams for the selected year
+                    if (maxstreams && selectedValue) {
+                        highstreams = maxstreams[selectedValue];; // Assign the value for the selected year
+                    }
+
+                    console.log("Average Streams: " + highstreams);
+                    document.getElementById("message").innerHTML =
+                        "In the year " + selectedValue + ", the highest streams of songs released in that year is " + highstreams;
+                }
+                    // Facts about the data
+
+                );
+                get(child(firebaseRef, '/higheststreamsong')).then((snapshot) => {
+                    if (snapshot.exists()) {
+                        console.log(snapshot.val());
+
+
+
+
+                    }
+                });
+
+                get(child(firebaseRef, '/averageBPM')).then((snapshot) => {
+                    if (snapshot.exists()) {
+                        console.log(snapshot.val());
+
+                    }
+                });
+                document.getElementById('musicchoice').addEventListener('change', function (event) {
+                    if (event.target.value === 'averageBPM') {
+                        get(child(firebaseRef, '/averageBPM')).then((snapshot) => {
+                            if (snapshot.exists()) {
+                                const averageBPM = snapshot.val(); // Get the value of averageBPM
+                                document.getElementById('message2').innerHTML = `Average BPM of Hit Songs: ${averageBPM}`;
+                            } else {
+                                document.getElementById('message2').innerHTML = 'No data available for average BPM.';
+                            }
+                        }).catch((error) => {
+                            console.error('Error fetching data: ', error);
+                        });
+                    }
+                });
+
+            </script>
+</body>
+
+</html>

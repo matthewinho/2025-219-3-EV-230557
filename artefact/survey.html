@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>user survey music hits </title>
+   
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   
+</head>
+<body>
+    <div class="container">
+        <form id="fireb">
+            <h3><b>VIBEVAULT</b></h3> 
+            <a href="http://127.0.0.1:5500/graphs.html" >GRAPHS</a>
+            <a href = 'http://127.0.0.1:5500/investigation.html' > FORM</a>
+            <br>
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" name="fname" required><br>
+
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" name="lname" required><br>
+
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required><br>
+
+            <label for="MusicEnjoymentInput">Do you enjoy music?</label>
+            <input type="checkbox" id="MusicEnjoymentInput" checked>
+            
+            <label for="concert">Do you go to concerts?</label>
+            <input type="checkbox" id="concert" checked>
+            <br>
+
+            <label>Gender:</label><br>
+            <input type="radio" id="male" name="gender" value="Male">
+            <label for="male">Male</label>
+            <input type="radio" id="female" name="gender" value="Female" checked>
+            <label for="female">Female</label><br>
+
+            <label for="music_hours">Hours of music per week:</label>
+            <select id="music_hours">
+                <option>0-5 hours</option>
+                <option>36+ hours</option>
+                <option>50+ hours</option>
+                <option>120+ hours</option>
+            </select>
+            <br><br>
+            <button type="submit">Submit</button>
+        </form>
+        <button id="Sres">Show Survey Results</button>
+    </div>
+    
+    <canvas id="myBarChart" style="width: 200; height: 1;"></canvas>
+    
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+        import { getDatabase, ref, push, get } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCuC-TfioQNO4knLx4iWXZ8TBVjiGghJu8",
+            authDomain: "lcacc2024.firebaseapp.com",
+            databaseURL: "https://lcacc2024-default-rtdb.europe-west1.firebasedatabase.app",
+            projectId: "lcacc2024",
+            storageBucket: "lcacc2024.firebasestorage.app",
+            messagingSenderId: "736551012525",
+            appId: "1:736551012525:web:ba5c15ebb5cde4f0ba9e24"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase();
+        const firebaseRef = ref(database, '/Submissions');
+
+        document.getElementById('fireb').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            let firstName = document.getElementById("fname").value;
+            let lastName = document.getElementById("lname").value;
+            let age = document.getElementById('age').value;
+            let enjoysMusic = document.getElementById("MusicEnjoymentInput").checked;
+            let enjoysConcerts = document.getElementById('concert').checked;
+            let musicHours = document.getElementById('music_hours').value;
+            let gender = document.querySelector('input[name="gender"]:checked').value;
+
+            if (!/^[A-Za-z]+$/.test(firstName) || !/^[A-Za-z]+$/.test(lastName)) {
+                alert("Names must contain only letters.");
+                return;
+            }
+
+            if (age <= 0 || isNaN(age)) {
+                alert("Please enter a valid age.");
+                return;
+            }
+
+            push(firebaseRef, {
+                userName: firstName,
+                userSurname: lastName,
+                userAge: age,
+                userEnjoyMusic: enjoysMusic,
+                enjoyConcert: enjoysConcerts,
+                musicHours: musicHours,
+                gender: gender
+            });
+
+            alert("Submission successful!");
+        });
+
+        let myBarChart;
+        document.getElementById('Sres').addEventListener("click", function() {
+            alert("Fetching survey results...");
+            
+            get(firebaseRef).then((snapshot) => {
+                if (snapshot.exists()) {
+                    let dataValues = Object.values(snapshot.val());
+                    
+                    let femaleEnjoyMusicConcert = 0;
+                    let maleEnjoyMusicConcert = 0;
+                    let femaleNotEnjoyMusicConcert = 0;
+                    let maleNotEnjoyMusicConcert = 0;
+
+                    dataValues.forEach(data => {
+                        if (data.userEnjoyMusic) {
+                            if (data.gender === 'Female' && data.enjoyConcert) {
+                                femaleEnjoyMusicConcert++;
+                            } else if (data.gender === 'Male' && data.enjoyConcert) {
+                                maleEnjoyMusicConcert++;
+                            }
+                        } else {
+                            if (data.gender === 'Female' && !data.enjoyConcert) {
+                                femaleNotEnjoyMusicConcert++;
+                            } else if (data.gender === 'Male' && !data.enjoyConcert) {
+                                maleNotEnjoyMusicConcert++;
+                            }
+                        }
+                    });
+
+                    const ctx = document.getElementById('myBarChart');
+                    if (myBarChart) myBarChart.destroy();
+
+                    myBarChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Female Enjoying Music and Concerts', 'Male Enjoying Music and Concerts', 
+                                     'Female Not Enjoying Music and Concerts', 'Male Not Enjoying Music and Concerts'],
+                            datasets: [{
+                                label: 'Concert Enjoyment by Gender (While Enjoying Music)',
+                                data: [femaleEnjoyMusicConcert, maleEnjoyMusicConcert, femaleNotEnjoyMusicConcert, maleNotEnjoyMusicConcert],
+                                backgroundColor: ['pink', 'blue', 'lightpink', 'lightblue'],
+                                borderColor: ['darkpink', 'darkblue', 'darkpink', 'darkblue'],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            plugins: {
+                                legend: { position: 'top' },
+                                title: { display: true, text: 'Concert Enjoyment by Gender (While Enjoying Music)' }
+                            }
+                        }
+                    });
+                } else {
+                    alert("No survey data available.");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
