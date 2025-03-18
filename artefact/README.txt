@@ -1,8 +1,10 @@
 READ-
 
 plugin for python:
-firebase_admin
-matplotlib
+open system shell-
+
+pip install firebase_admin
+pip install matplotlib
 
 javascript:
 firebase
