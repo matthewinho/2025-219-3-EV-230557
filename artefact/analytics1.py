@@ -1,9 +1,15 @@
 import firebase_admin
+ 
 from firebase_admin import credentials
+ 
 from firebase_admin import db
-import matplotlib.pyplot as plt 
+ 
+import matplotlib.pyplot as plt
+ 
 import matplotlib.animation as animation
+ 
 cred = credentials.Certificate("lcacc2024-firebase-adminsdk-8bnwo-9b308a3274.json")
+ 
 firebase_admin.initialize_app(cred, {'databaseURL':'https://lcacc2024-default-rtdb.europe-west1.firebasedatabase.app//'})
  
 ref = db.reference('/')
@@ -74,15 +80,9 @@ songsinmonth = []
  
 monthsd = {}
  
-for x in range(0,953):
+for x in range(len(allmonth)):
  
-    #currentmonth = mon[x]
- 
-    #currentinfo =
- 
-    #currentmonth = mon[x]
- 
-    #monthinfo[currentmonth]
+
  
     inmonth = allmonth[x]
  
@@ -119,18 +119,30 @@ plt.bar(categories, values)
  
 # Adding labels and title
  
-plt.xlabel('all months')
+plt.xlabel('months of year')
  
 plt.ylabel('Values')
  
-plt.title('Bar chart showing release of songs for each month')
+plt.title('Basic Bar Chart')
  
 # Displaying chart
  
 plt.show()
  
  
-
+#  
+ 
+#     
+ 
+# print('months released for music')
+ 
+# a=  sorted(top3)
+ 
+# a.reverse()
+ 
+# print(a[:3])
+ 
+# #
  
 def get_bpm():
  
@@ -207,29 +219,29 @@ totaldeezerchart =sum(deezerchart)
  
 
  
-bing = totalsongsinspotchart+totalsongsinapplechart
- 
-bong = totalsongsinspotchart/bing*100/1
- 
-cong = totalsongsinapplechart/bing*100/1
- 
-zong =totaldeezerchart/bing*100
- 
-#print(bong,"%")
- 
-rounded2 = round(bong,2)
- 
-print(rounded2, "% people that use spotify  in all years mentioned")
- 
-#print(bing,"%")
- 
-rounded3 = round(cong,2)
- 
-print(rounded3,"% that use apple music  in all years mentioned")
- 
-rounded4 = round(zong,2)
- 
-print(rounded4,"% that use deezer in all years mentioned")
+# bing = totalsongsinspotchart+totalsongsinapplechart
+#  
+# bong = totalsongsinspotchart/bing*100/1
+#  
+# cong = totalsongsinapplechart/bing*100/1
+#  
+# zong =totaldeezerchart/bing*100
+#  
+# #print(bong,"%")
+#  
+# rounded2 = round(bong,2)
+#  
+# print(rounded2, "% people that use spotify  in all years mentioned")
+#  
+# #print(bing,"%")
+#  
+# rounded3 = round(cong,2)
+#  
+# print(rounded3,"% that use apple music  in all years mentioned")
+#  
+# rounded4 = round(zong,2)
+#  ENDED UP NOT USING THIS INFORMATION
+# print(rounded4,"% that use deezer in all years mentioned")
 def get_years():
  
     ref = db.reference('released_year')
@@ -357,7 +369,7 @@ fig, ax = plt.subplots()
  
 ax.plot(months_str, values)
  
-ax.set(xlabel='Years (s)', ylabel='music released [frequency]', title = "songs released per year [frequency]")
+ax.set(xlabel='Years (s)', ylabel='music released', title = "songs released in year [frequency]")
  
 ax.tick_params(axis='x', labelrotation=45)
  
@@ -448,16 +460,17 @@ for d in range(len(allyears)):
 labels = list(averagesByYear[2016].keys()) #insert year to get data on year
  
 sizes = list(averagesByYear[2016].values())
-
- 
+ax.set(xlabel='music platforms', ylabel='music released', title = "songgs released in year [frequency]") 
 print(labels)
  
 # Plot the pie chart
- 
+plt.title('Pie Chart showing , which music apps positively affect hitsongs from certain years [2016]')
 plt.pie(sizes, labels=labels, autopct='%1.1f%%')
  
 plt.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
-plt.title('Hitsongs from given year , which music platform affects their streams most')
+
+ 
+
 plt.show()
  
 print('sending to firebase')
