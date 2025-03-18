@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>music hits </title>
+   
+    <script>
+        function showSection(id) {
+            document.querySelectorAll('section').forEach(section => {
+                section.style.display = 'none';
+            });
+            document.getElementById(id).style.display = 'block';
+        }
+    </script>
+</head>
+<body>
+    <div class="navbar">
+        <button onclick="showSection('meeting-the-brief')">Meeting the Brief</button>
+        <button onclick="showSection('investigation')">Investigation</button>
+        <button onclick="showSection('plan-design')">Plan & Design</button>
+        <button onclick="showSection('create')">Create</button>
+        <button onclick="showSection('evaluation')">Evaluation</button>
+        <button onclick="showSection('references')">References</button>
+        <button onclick="showSection('summary-word-count')">Summary Word Count</button>
+    </div>
+   
+    <section id="meeting-the-brief">
+       
+        <p><video width="640" height="360" controls>
+            <source src="compscivid.mp4" type="video/mp4">
+            
+        </video></p>
+    </section>
+   
+    <section id="investigation">
+        <h2>Investigation</h2>
+        <p>For my project, I initially explored Kaggle for a dataset that piqued my interest. While I found datasets on pressing issues like the housing crisis and climate change, they didn’t fully align with my expectations. After further exploration, I discovered a CSV file on music ,specifically, the most popular songs of 2023. Music has always been a significant part of my life, and this dataset felt like the perfect fit.
+
+            Titled "Top Spotify Songs 2023," the dataset provides valuable insights into music trends, including song popularity, BPM, energy levels, and more. I was particularly interested in analyzing what factors contribute to a song becoming a hit. My goal is to identify patterns that might explain a song’s success and explore whether there are common traits that increase the chances of a song going viral.
+            
+            One key area I aim to investigate is whether the timing of a song’s release impacts its popularity. Are there certain  periods in the year that maximize a song’s success? Awswell, I want to examine the role of social media in showcasing hit songs—determining which platforms are most effective in driving engagement and whether they correlate with a song’s popularity. Another aspect of my analysis will be assessing whether past hit songs remain relevant over time.
+            
+            This dataset is particularly useful for music enthusiasts who want to rediscover insights about their favorite songs. By analyzing trends in BPM, energy, and other characteristics, I hope to uncover patterns that could potentially inform the creation of future hit songs.
+            
+            I chose this dataset from Kaggle because it provides detailed and relevant information for my project’s objectives. A website that inspired me is gov.ie – Showcases (data.gov.ie), which effectively presents data insights in an engaging and informative manner.
+            
+            Dataset Reference:
+            Top Spotify Songs 2023 – Kaggle
+           
+             
+           
+         
+            </p>
+            
+                
+     
+     <p>
+        This dataset will be targeted towards people who enjoy music thoroughly and want to rediscover certain information about their favourite songs.
+     </p>
+     <p>
+my dataset: <a href="https://www.kaggle.com/datasets/nelgiriyewithana/top-spotify-songs-2023 " target="_clickthelink">https://www.kaggle.com/datasets/nelgiriyewithana/top-spotify-songs-2023</a>
+     </p>
+     <p>
+I chose the specific dataset from Kaggle because it had a lot of useful information I can use and that related to what I wanted to do with the project.
+</p>
+<p>
+    A website i got inspiration from was gov.ie  : Showcases - data.gov.ie
+ 
+   
+   
+        </p>
+        <img src="Image.jfif" class="graph" alt="idea" style="width: 500px; height: 500px;">
+       
+   
+    
+ 
+    </section>
+   
+    <section id="plan-design">
+        <h2>Plan & Design</h2>
+        <p>Plan and Design
+ 
+ 
+            The dataset I chose of my top interests is music. 
+
+Music  plays a major role in my daily life. 
+
+I chose the specific dataset from Kaggle because it had a lot of useful information I can use and that related to what I wanted to do with the project. 
+
+The target audience are music enthusiasts aged from 16 years of age upwards. 
+
+This will be done using an Agile approach. 
+
+ I will have a Kaggle dataset downloaded as a csv file . This is in order to extract the required information. Part of my plan and design will include a flowchart and a system-architectural-diagram to represent my technologies 
+           
+           
+             
+           
+           
+          </p>
+          <p>   Plan for Basic requirements:
+           
+            Firstly I will be using Pandas on  python to clean my dataset. Then I will store this new cleaned information onto a CSV file. I will send the new information up to Firebase. This will be a useful resource as it is a cloud-based database that stores data, which updates in real time also. The mathematics aspect will be stored in a dictionary used to graph, it will also be sent to Firebase. This data will be analysed and represented using Matplotlib, to make my graphs. These graphs will illustrate a mathematical means to display my findings.  </p>
+           
+          <p>
+            Plan for Advanced requirements ->
+           
+            The interactive graphs: I will display on an interactive graph how music apps contribute to the success of songs. By looking at how apple music, Deezer and Spotify are most effective for showcasing hit songs, I hope to uncover any correlations between a song's social media presence and its popularity. This could provide valuable insights into modern music marketing strategies . Lastly, I’m curious about the longevity of past hit songs. I want to explore whether certain songs that were once popular remain relevant. This project will not only focus on the music itself but also on the factors influencing music popularity, providing insights into the evolving relationship between music and its audience in the digital age. This will be shown through my graphs and recommendations. I will display these graphs in javascript using chart.js 
+            <p>
+                I will make a user survey .They will input a string, boolean and integer. This will be made using Java Script and Firebase. A graph / graphs will appear. This will be done by pressing a button, the data will be received from Firebase and used to generate a graph using Chart.js once again, displayed to the user. 
+
+I am mindful of ethical considerations because my website will promote established songs / artists. This feature may infringe on marginalised artists
+       
+           
+            </p>
+            <h2>System Design </h2>
+ 
+            <img src="properwireframe.png" class="graph" alt="wireframe" style="width: 500px; height: 500px;">
+<img src="properwireframe2.png" class="graph" alt="wireframe" style="width: 100; height: 200;">
+<img src="archetictual system design.png" class="graph" alt="ASD" style="width: 1000px; height: 200;"> <br>
+<img src="archsys2.png" class="graph" alt="ASD" style="width: 1000px; height: 200;">
+<img src = 'codetoflow.png'class="graph" alt="ASD" style="width: 600px; height: 1000px;">
+<!-- <iframe src="" frameborder="0"></iframe> -->
+    </section>
+   
+   
+    <section id="create">
+        <h2>Create</h2> 
+        <p>Week 1:
+ 
+            Firstly, I began to search for a dataset of my liking using Kaggle. At the end of the week, I managed to find a dataset that piqued my interest.
+        </p>
+        <p>
+            Week 2:
+ 
+I began to write up my investigation piece, whilst also doing a mind map and putting ideas on a piece of paper.
+            <p>
+            Week 3: When I started using the dataset in Thonny, coding in Python, I began data cleaning using Python’s Pandas library. I started by removing unnecessary columns or information, and I also ensured the data names were made clearer to ensure consistency for analysis. The cleaned dataset was then stored in a CSV file for further processing.
+            </p>
+            <p>
+ 
+            Week 4: I began using the columns to perform calculations such as percentages, means, mode, and frequencies of the columns. Using Matplotlib, I was able to view my analytics on graphs, which provided me with insights into possible trends.
+           </p>
+           <p>
+            Week 5:
+ 
+After finishing my analysis, I uploaded my results onto Firebase to then use in Visual Studio Code. I then began extracting the information to start building my first interactive graph. I also fully completed the plan and design during this week.
+           </p>
+           <p>
+            Week 6:
+ 
+I created a bar chart and a pie chart using Chart.js in Visual Studio Code. User interactivity was also implemented for both of these charts.
+           </p>
+           <p>
+            Week 7:
+ 
+The graphs and their interactivity were now fully complete. I then made another file to create a user survey form. This form was designed to collect feedback and additional data from users inputting their information into the user survey.
+            <p>
+                Week 8:
+ 
+The form had at least three types of input and was validated using JavaScript before submission. During this week, I also coded the form so that Firebase could store the responses.
+ 
+I ensured that the information from each submission by the user was saved correctly. This was important to ensure that I could start making a graph based on the collected data.
+           <p>
+            Week 9:
+ 
+            I coded up the graph using three data types. I began working on my recommendations, intending to have at least two recommendations ready by the completion date.
+           </p>
+           <p>
+            Week 10:
+ 
+            I coded the recommendations for my graph page. I also extracted the information from Firebase to input facts into the system. Additionally, I made sure users could click on an option. I also added hyperlinks to allow users to go from the survey to the graph page.
+            </p>
+            <p>
+                Week 11:
+ 
+                The testing process enabled me to identify any issues with the user experience, along with any weaknesses in the code.
+            </p>
+            Week 12:
+ 
+Final adjustments were done. I improved the aesthetics of the website, ensuring it was user-friendly and visually appealing. I also debugged where necessary to make sure all calculations and outcomes were correct.
+            <p>
+                Issue Encountered in My Project
+                While working on my project, I encountered an issue when iterating through a column containing the number of streams for each song. This column was expected to contain only integers, but I found a string entry that caused errors in my code. Since numerical operations like summing or comparing values require consistent data types, this inconsistency disrupted my analysis.
+                
+                Such issues often arise in datasets due to data entry errors or inconsistencies from multiple sources. To resolve this, I used Python's try-except method to check each entry—attempting to convert values to integers and skipping any invalid ones. This ensured that only numerical values remained, allowing my analysis to proceed without errors.
+                
+                This experience highlighted the importance of data validation and cleaning in ensuring reliable analysis. Proper validation helps detect inconsistencies early, making datasets more accurate and trustworthy.
+            <p>
+              
+            <p>
+                Algorithm for Cleaning Invalid Data in a Dataset:
+ 
+                1,Initialize the dataset (the list of song streams) which may contain both valid integers and invalid string values.
+               
+                2,Create an empty list or new dataset to store valid data.
+               
+                3,For each item in the dataset (iterate through each entry): a. Check if the item is an integer: i. If the item can be converted to an integer, append it to the new list of valid data. ii. If the item cannot be converted to an integer (it’s a string or invalid), skip it or remove it.
+               
+                4,Return the cleaned dataset (list with only valid integers).
+               
+                5,Perform necessary operations (such as summing, sorting, etc.) on the cleaned dataset.
+               
+                End.
+            </p>
+ 
+<p>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .pass {
+            color: green;
+        }
+        .fail {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Test Table for Firebase Data Upload and Retrieval (python) </h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Test Case ID</th>
+                <th>Test Description</th>
+                <th>Test Steps</th>
+                <th>Expected Output</th>
+                <th>Actual Output</th>
+                <th>Pass/Fail</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>TC-01</td>
+                <td>Verify data is stored in Firebase</td>
+                <td>1. Upload data to Firebase<br>2. Retrieve data from Firebase<br>3. Check if data is not `None`</td>
+                <td>Data exists in Firebase</td>
+                <td> Data retrieved successfully</td>
+                <td class="pass">Pass</td>
+            </tr>
+            <tr>
+                <td>TC-02</td>
+                <td>Validate data structure</td>
+                <td>1. Retrieve first record<br>2. Check if it contains required fields (`artist_name`, `bpm`, `streams`, `released_year`, `released_month`)</td>
+                <td>Record contains all required fields</td>
+                <td> All required fields are present</td>
+                <td class="pass">Pass</td>
+            </tr>
+            <tr>
+                <td>TC-03</td>
+                <td>Validate data types</td>
+                <td>1. Check if `bpm` and `streams` are numeric<br>2. Check if `artist_name` is a string</td>
+                <td>`bpm` & `streams` → Numeric<br>`artist_name` → String</td>
+                <td> Correct data types</td>
+                <td class="pass">Pass</td>
+            </tr>
+            <tr>
+                <td>TC-04</td>
+                <td>Validate number of records</td>
+                <td>1. Count records in Firebase<br>2. Compare with expected count from CSV</td>
+                <td>Record count matches CSV file</td>
+                <td> Record count is correct</td>
+                <td class="pass">Pass</td>
+            </tr>
+            <tr>
+                <td>TC-05</td>
+                <td>Verify specific data point</td>
+                <td>1. Retrieve a known track<br>2. Compare with CSV values</td>
+                <td>Values match CSV file</td>
+                <td> Data matches</td>
+                <td class="pass">Pass</td>
+            </tr>
+        </tbody>
+    </table>
+    </p>
+    <p>
+        <title>Test Table for Website User Input</title>
+        <style>
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            th, td {
+                padding: 8px 12px;
+                border: 1px solid #ddd;
+                text-align: left;
+            }
+            th {
+                background-color: #f2f2f2;
+            }
+            .pass {
+                color: green;
+            }
+            .fail {
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+    
+        <h1>Test Cases for Website User Input (javascript)</h1>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Test Case ID</th>
+                    <th>Test Scenario</th>
+                    <th>Test Steps</th>
+                    <th>Expected Result</th>
+                    <th>Real Result</th>
+                    <th>Pass/Fail</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>TC001</td>
+                    <td>Input correct user first name and last name</td>
+                    <td>1. Open website<br>2. Input correct user details<br>3. Press submit + see results</td>
+                    <td>For the first name and other details to be saved correctly</td>
+                    <td>What was predicted for expected result ,occurred</td>
+                    <td class="pass">Pass</td>
+                </tr>
+                <tr>
+                    <td>TC002</td>
+                    <td>Input numbers into first name field and last name</td>
+                    <td>1. Open website<br>2. Input incorrect details<br>3. Press submit + see results</td>
+                    <td>For an alert to come up saying incorrect name inputted, try again</td>
+                    <td>What was predicted for expected result ,occurred</td>
+                    <td class="pass">Pass</td>
+                </tr>
+                <tr>
+                    <td>TC003</td>
+                    <td>Input negative numbers into age field</td>
+                    <td>1. Open website<br>2. Input incorrect user age<br>3. Press submit + see results</td>
+                    <td>For an alert to come up saying incorrect age inputted, try again</td>
+                    <td>What was predicted for expected result occurred</td>
+                    <td class="pass">Pass</td>
+                </tr>
+                <tr>
+                    <td>TC004</td>
+                    <td>Input correct age into age field</td>
+                    <td>1. Open website<br>2. Input correct user details<br>3. Press submit + see results</td>
+                    <td>For correct information to be saved in firebase </td>
+                    <td>What was predicted for expected result ,occurred</td>
+                    <td class="pass">Pass</td>
+                </tr>
+            </tbody>
+        </table>
+    
+    </body>
+        <p>
+            Pseudocode for Python  (Calculating Average BPM from a List)
+        </p>
+        <p>
+            SET bpm_list to a list of BPM values (e.g. [120, 130, 125, 140, 115])
+            <br>
+    
+    SET total_bpm to 0
+    <br>
+    FOR each bpm in bpm_list
+        ADD bpm to total_bpm
+    END FOR
+    <br>
+    SET average_bpm to total_bpm divided by the number of elements in bpm_list
+    <br>
+    PRINT "The average BPM is: ", average_bpm
+<br>
+END  
+         </p>
+    </section>
+   
+    <section id="evaluation">
+        <h2>Evaluation</h2>
+        <p>In this project, I explored what made a song popular by analysing data from the Top Spotify Songs 2023 dataset. Using Python tools like Pandas and Matplotlib, I cleaned and processed the data, while Firebase helped store the information. To make the findings more engaging, I used JavaScript and Chart.js to create interactive graphs.
+            My main focus was to see if there were common patterns among hit songs. I looked at features like BPM, energy, and release month to find out if certain trends made a song more likely to succeed. I also examined how streaming platforms like Spotify, Apple Music, and Deezer helped songs gain popularity. Another interesting part of my project was checking if past hit songs were still popular today.
+            One of the interactive features was the year selection dropdown, which updated the chart based on the chosen year. This allowed users to compare different time periods and discover trends. Another feature was the ability to filter songs by minimum and maximum stream values, helping users identify songs with the highest and lowest popularity.
+            
+           
+           
+            
+</p>
+<p>
+    Overall, this project provided a functional and insightful way to explore the characteristics of hit songs, benefiting music lovers, researchers, and industry professionals seeking to understand music trends over time.
+            
+           </p>
+           <p>
+            If I were to make an improvement:
+            I would upgrade the visual aspects of the project by using a more responsive design and possibly exploring advanced chart libraries. Enhancing interactivity, such as more detailed filtering options or dynamic dashboards. I think this would allow users to dive deeper into the data.
+            A better UI can make the insights more accessible and engaging for both casual users and industry professionals.
+            </p>
+            <p>
+           
+            </p>
+    </section>
+    <section id ="references">
+        <h2>References</h2>
+        <p>
+            <a href="https://www.kaggle.com/datasets/nelgiriyewithana/top-spotify-songs-2023" target="_clickthelink">https://www.kaggle.com/datasets/nelgiriyewithana/top-spotify-songs-2023</a>
+ 
+       
+        </p>
+        <p>
+            <a href = https://rgbcolorpicker.com/ target="_clickthelink"> colour picker</a><br>
+            <a href="https://data.worldbank.org/" target="_clickthelink">https://data.worldbank.org/</a>
+        </p>
+        <p>
+            <a href="https://data.gov.ie/dataset/" target="_clickthelink">https://data.gov.ie/dataset/</a>
+            <a href="https://balsamiq.com/" target="_clickthelink">https://balsamiq.com/</a>
+            https://miro.com
+            <a href="https://miro.com/blog/mapping-architecture-diagrams/" target="_clickthelink">https://miro.com/blog/mapping-architecture-diagrams/</a><br>
+            <a href="https://miro.com/" target="_clickthelink">https://miro.com/</a>
+            <a href = 'https://app.diagrams.net/' target='_clickthelink'>https://app.diagrams.net/</a>
+        </p>
+    </section>
+    <section id="summary-word-count">
+        <h2>Summary Word Count</h2>
+        <p> Investigation = 362 words <br>
+            Plan and Design = 432 words <br>
+            Create = 1,062 words [including Text tables, exluding pseudocode]<br>
+            Evaluation = 276 words 
+        </p>
+            
+    </section>
+</body>
+</html>
+ 
+ 
